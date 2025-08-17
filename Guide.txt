@@ -1,0 +1,39 @@
+- Download Latest Stable Version - Debian. Forbidden graphics/X.org/equivalent.
+- Hostname must end with 42. Modify during evaluation.
+- Create user with my login (besides root). It must belong to user42 and sudo groups.
+- At least 2 encrypted partitions using LVM. Eg. /(root), SWAP, /home.
+- Install and configure sudo using strict rules:
+    - Authentication with sudo with max 3 attempts.
+    - Show custom message if error due to wrong password using sudo.
+    - Log every input and output using sudo. Save to /var/log/sudo/.
+    - Enable TTY mode.
+    - Restrict paths when using sudo.
+- Implement strong password policy:
+    - Expire every 30 days.
+    - Minimum 2 days before changing.
+    - Warning 7 days before expires.
+    - At least 10 characters long. Uppercase, lowercase, number. No more than 3 equal.
+    - Must not include name of the user.
+    - Non-root passwords: at least 7 characters different from old password.
+    - All policies applies to root.
+- Run SSH service on port 4242. Must not connect as root.
+- Configure OS with UFW firewall and let only port 4242 open.
+- Set up AppArmor to run at startup.
+- Create script in bash called monitoring.sh. At server startup, display info on all terminals every 10min. Banner optional. No error visible. Following info:
+    - System arch and kernel version.
+    - Num of physical processors.
+    - Num of virtual processors.
+    - Current available RAM and percent of use.
+    - Current available storage and percent of use.
+    - Current percent of use of processors.
+    - Date and time of last reboot.
+    - LVM active or not.
+    - Num of active connections.
+    - Num of active users.
+    - IPv4 and MAC addresses.
+    - Num of commands executed with sudo.
+BONUS:
+    - Set up also /var, /srv, /tmp, and /var/log with LVM.
+    - Set up functional WordPress website with lighttpd, Maria-DB and PHP.
+    - Set up any additional service. Eg. NGINX, Apache2.
+    - You may open more ports as needed.

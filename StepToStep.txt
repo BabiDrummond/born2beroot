@@ -1,0 +1,92 @@
+Set up ISO:
+    - Select image: Debian 13 (LTS)
+    - Base memory: 4GB
+    - Processors: 4
+    - Disk size: 20GB
+    - BIOS (not UEFI)
+Installation settings:
+    - Language: English
+    - Location: other -> South America -> Brazil
+    - Locales: United States
+    - Keyboard: Portuguese
+Device settings:
+    - Hostname: bmoreira42
+    - Domain name: Leave it empty for default.
+    - Root password: Thequinfoxjumps#1
+    - Name: Babi Drummond
+    - New user: bmoreira
+    - User password: Overthelazytown#3
+    - Timezone: São Paulo
+Partitions:
+    - Partition method: Guided - LVM encrypted
+    - Separate home partition (if no bonus)
+    - Encryption passphrase: Banana4Cimento$China
+    - Amount: Leave it at max (if no bonus)
+    - Finish partitioning and write to disk
+Package manager:
+    - Scan extra installation media: No
+    - Mirror country: Brazil
+    - Archive mirror: debian-archive.trafficmanager.net
+    - HTTP proxy: Blank
+    - Software selection: Check only SSH Server and System utilitaries. Uncheck others.
+    - GRUB Boot loader: Install to primary drive.
+Install services:
+    - Change to root user: 'su'
+    - Update and upgrade: 'apt update && apt upgrade'
+    - Install services: 'apt install sudo ufw apparmor ssh vim'
+Set up sudo strict rules: 
+    - Create new group: 'sudo groupadd bmoreira42'
+    - Add user to groups: 'adduser bmoreira sudo' and 'adduser bmoreira bmoreira42'
+    - Edit sudo configs: 'sudo visudo'
+        Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+        Defaults    passwd_tries=3
+        Defaults    insults
+        Defaults    requiretty
+        Defaults    log_input, log_output
+        Defaults    iolog_dir=/var/log/sudo/
+Set up strong password policy:
+    - Edit: vim /etc/login.defs
+        PASS_MAX_DAYS   30
+        PASS_MIN_DAYS   2
+        PASS_WARN_AGE   7
+    - Install apt -y install libpam-pwquality
+    - Edit: vim /etc/pam.d/common-password
+        - Non root users: password  requisite   pam_pwquality.so retry=3 minlen=10 maxrepeat=3 ucredit=-1 lcredit=-1 dcredit=-1 difok=7 reject_username
+        - Root user: password  requisite   pam_pwquality.so user=root retry=3 minlen=10 maxrepeat=3 ucredit=-1 lcredit=-1 dcredit=-1 reject_username enforce_for_root
+Set up SSH:
+    - 'systemctl enable ssh'
+    - Edit: /etc/ssh/sshd_config
+        Port 4242
+        PermitRootLogin no
+Set up UFW (Firewall):
+    - 'systemctl enable ufw'
+    - 'ufw default deny incoming'
+    - 'ufw default allow outgoing'
+    - 'ufw allow 4242/tcp'
+    - Evaluation: 'ufw allow SSH' && 'ufw delete allow SSH'
+Set up AppArmor:
+    - 'systemctl enable apparmor'
+Generate signature:
+    - sha1sum ~/Virtual/BornVM.vdi > signature.txt
+
+Commands to test:
+- Test partitions: lsblk
+- Test groups: groups [user]
+- Test services: sudo systemctl status [service] (options: start/stop - enable/disable - status - restart)
+- Test ssh:
+    - Change network VM: Settings > Network: Change from NAT to Bridge Adapter. Bridge adapter assigns an individual IP to my VM.
+    - Get my VM ip: ip a (its after 2nd inet)
+    - Login in my VM from outside: ssh -p 4242 bmoreira@10.11.200.238
+    - Logout: exit
+- Create user: adduser nameuser
+- Delete user: deluser nameuser
+- Change password: passwd nameuser
+- Change hostname: nano /etc/hostname/
+- List users: cat /etc/passwd | cut -d: -f1
+- Schedule cron every 10min: crontab -e
+- Schedule script to run at startup: nano /etc/profile
+- Connect ssh: ssh -p 4242 bmoreira@10.11.200.238
+- Check ufw ports: ufw status
+- Allow ports: ufw allow [port]
+- Delete rule: ufw delete allow [port]
+- Check ssh: cat /etc/ssh/sshd_config
