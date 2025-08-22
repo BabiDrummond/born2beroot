@@ -76,7 +76,7 @@ Commands to test:
 - Test ssh:
     - Change network VM: Settings > Network: Change from NAT to Bridge Adapter. Bridge adapter assigns an individual IP to my VM.
     - Get my VM ip: ip a (its after 2nd inet)
-    - Login in my VM from outside: ssh -p 4242 bmoreira@10.11.200.238
+    - Login in my VM from outside: ssh -p 4242 bmoreira@<ip>
     - Logout: exit
 - Create user: adduser nameuser
 - Delete user: deluser nameuser
@@ -85,7 +85,7 @@ Commands to test:
 - List users: cat /etc/passwd | cut -d: -f1
 - Schedule cron every 10min: crontab -e
 - Schedule script to run at startup: nano /etc/profile
-- Connect ssh: ssh -p 4242 bmoreira@10.11.200.238
+- Connect ssh: ssh -p 4242 bmoreira@<ip>
 - Check ufw ports: ufw status
 - Allow ports: ufw allow [port]
 - Delete rule: ufw delete allow [port]
