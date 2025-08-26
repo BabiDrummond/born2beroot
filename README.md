@@ -9,19 +9,19 @@ A reproducible, auditable setup of a minimal **Debian (latest stable)** server t
 ## Table of Contents
 
 - [Project Goals](#project-goals)
-- [Virtual Machine & OS](#virtual-machine--os)
-- [Disk Layout (LVM)](#disk-layout-lvm--luks)
-- [Users & Groups](#users--groups)
-- [Sudo Hardening](#sudo-hardening)
-- [Password Policy](#password-policy)
-- [SSH](#ssh)
-- [Firewall (UFW)](#firewall-ufw)
-- [AppArmor](#apparmor)
-- [`monitoring.sh`](#monitoringsh)
-- [Verification / Evaluation Checklist](#verification--evaluation-checklist)
-- [Common Commands](#common-commands)
+- [Virtual Machine & OS](#step-1-virtual-machine--os)
+- [Disk Layout (LVM)](#step-2-disk-layout-lvm)
+- [Package Manager](#step-3-package-manager)
+- [Users & Groups](#step-4-users--groups)
+- [Initial Setup & Sudo Hardening](#step-5-initial-setup--sudo-hardening)
+- [Password Policy](#step-6-password-policy)
+- [SSH](#step-7-ssh)
+- [Firewall (UFW)](#step-8-firewall-ufw)
+- [AppArmor](#step-9-apparmor)
+- [Monitoring Script](#step-10-monitoring-script)
+- [Verification & Evaluation Checklist](#final-verification--evaluation-checklist)
 - [Signature (checksum) of the VM image](#signature-checksum-of-the-vm-image)
-- [Credits](#credits)
+- [Author](#author)
 
 ---
 
@@ -290,7 +290,7 @@ echo 'sudo /usr/local/bin/monitoring.sh' >> /etc/profile
 
 ---
 
-## Final: Verification && Evaluation Checklist
+## Final: Verification & Evaluation Checklist
 
 - **OS / Hostname**
   - `lsb_release -a` (or `/etc/debian_version`)
