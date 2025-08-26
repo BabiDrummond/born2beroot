@@ -8,7 +8,7 @@ A reproducible, auditable setup of a minimal **Debian (latest stable)** server t
 
 ## Table of Contents
 
-- [Project Goals](#project-goals)
+- [Project Goals](#-project-goals)
 - [Virtual Machine & OS](#step-1-virtual-machine--os)
 - [Disk Layout (LVM)](#step-2-disk-layout-lvm)
 - [Package Manager](#step-3-package-manager)
