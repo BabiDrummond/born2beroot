@@ -18,9 +18,11 @@ message="#######################################################################
 ###_Sudo: $(cat /var/log/sudo/sudo.log | grep COMMAND | wc -l) cmd
 ###############################################################################"
 
-terminals="$(who | awk '/pts/{print $3}' && who | awk '/tty/{print $2}')"
+terminals="$(who | awk '/pts/{print $3}')"
 
 for terminal in $terminals
 do
 	echo "$message" > /dev/$terminal
 done
+
+wall "$message"
