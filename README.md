@@ -283,7 +283,7 @@ crontab -e
 */10 * * * * /usr/local/bin/monitoring.sh
 
 # Run once at login for all interactive shells:
-echo 'sudo /usr/local/bin/monitoring.sh' >> /etc/profile
+echo '/usr/local/bin/monitoring.sh' >> /etc/profile
 ```
 
 > The script must **not show errors**; redirect any noisy commands’ stderr if needed.

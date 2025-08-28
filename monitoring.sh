@@ -15,7 +15,7 @@ message="#######################################################################
 ###_Connections TCP: $(ss -a | grep tcp | grep ESTAB | wc -l) ESTABLISHED
 ###_Users logged: $(uptime | grep -o '[0-9]\+ user' | awk '{print $1}')
 ###_Network: IP $(ip a | grep inet | awk 'NR == 3 {print $2}' | cut -d/ -f1) ($(ifconfig | awk '/ether/ {print $2}'))
-###_Sudo: $(cat /var/log/sudo/sudo.log | grep COMMAND | wc -l) cmd
+###_Sudo: $(sudo cat /var/log/sudo/sudo.log | grep COMMAND | wc -l) cmd
 ###############################################################################"
 
 terminals="$(who | awk '/pts/{print $3}')"
@@ -25,4 +25,4 @@ do
 	echo "$message" > /dev/$terminal
 done
 
-wall "$message"
+sudo wall "$message"
